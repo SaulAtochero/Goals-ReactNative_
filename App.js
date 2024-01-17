@@ -1,4 +1,11 @@
-import { StyleSheet, TextInput, View, Button, Text, LogBox } from 'react-native';
+import {
+  StyleSheet,
+  TextInput, Text,
+  View,
+  Button,
+  FlatList,
+
+} from 'react-native';
 import { useState } from 'react';
 export default function App() {
 
@@ -32,15 +39,19 @@ export default function App() {
         />
       </View>
       <View style={style.goalsContainer}>
+
         <Text style={style.textoB}> Tu lista de metas..</Text>
-        {myGoals.map((goal, i) => {
-          return (
-            <View key={i}
+        <FlatList
+          data={myGoals}
+          renderItem={(item) => (
+            <View key={item.item}
               style={style.vista}>
-              <Text style={style.textoVista}>   -  {goal}</Text>
+              <Text style={style.textoVista}>   -  {item.item}</Text>
             </View>
           )
-        })}
+
+          }
+        />
       </View>
     </View>
   );
