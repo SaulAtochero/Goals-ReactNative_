@@ -7,11 +7,15 @@ export default function App() {
   //        |          |
   //        V          V
   const [newGoal, setNewGoal] = useState("");
+  const [myGoals, setMyGoal] = useState([]);
 
 
   function textChangeHandler(texto) {
     setNewGoal(texto);
-    console.log(newGoal);
+    //console.log(newGoal);
+  }
+  function añadirLista() {
+    setMyGoal(myGoals => [...myGoals, newGoal]);
   }
 
   return (
@@ -24,10 +28,19 @@ export default function App() {
         />
         <Button
           title='Enviar'
+          onPress={añadirLista}
         />
       </View>
       <View style={style.goalsContainer}>
-        <Text style={style.texto}> Tu lista de metas...</Text>
+        <Text style={style.textoB}> Tu lista de metas..</Text>
+        {myGoals.map((goal, i) => {
+          return (
+            <View key={i}
+              style={style.vista}>
+              <Text style={style.textoVista}>   -  {goal}</Text>
+            </View>
+          )
+        })}
       </View>
     </View>
   );
@@ -63,10 +76,25 @@ const style = new StyleSheet.create({
     flex: 5,
   },
   //-------------------------------------------------------------------------------------------//
-  texto: {
+  textoB: {
     fontWeight: "bold",
     fontSize: 20,
   },
   //-------------------------------------------------------------------------------------------//
+  vista: {
+    marginBottom: 5,
+    borderRadius: 8,
+    padding: 6,
+    borderBottomColor: "red",
+    borderBottomWidth: 7,
+    borderTopColor: "red",
+    borderTopWidth: 7,
+    backgroundColor: "yellow",
+  },
+  //-------------------------------------------------------------------------------------------//
+  textoVista: {
+    color: "red",
+    fontSize: 20,
+  },
 
 })
