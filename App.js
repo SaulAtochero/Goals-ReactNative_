@@ -7,46 +7,37 @@ import {
 
 } from 'react-native';
 import { useState } from 'react';
+import MeterMeta from './componentes/MeterMeta';
 export default function App() {
 
   //Declaramos el Hook de estado de componente "newGoal"
   //      "get"      "set"
   //        |          |
   //        V          V
-  const [newGoal, setNewGoal] = useState("");
   const [myGoals, setMyGoal] = useState([]);
 
 
-  function textChangeHandler(texto) {
-    setNewGoal(texto);
-    //console.log(newGoal);
-  }
-  function añadirLista() {
-    setMyGoal(myGoals => [...myGoals, newGoal]);
+  //me llevo el  text Change handler
+  function añadirLista(newGoalText) {
+    setMyGoal(myGoals => [...myGoals, {
+      id: Date.now(),
+      text: newGoalText,
+    }]);
+
   }
 
   return (
     <View style={style.container}>
-      <View style={style.inputcontainer}>
-        <TextInput
-          style={style.TextInput}
-          placeholder='Introduce una meta'
-          onChangeText={textChangeHandler}
-        />
-        <Button
-          title='Enviar'
-          onPress={añadirLista}
-        />
-      </View>
+      <MeterMeta nuevaMeta={añadirLista} />
       <View style={style.goalsContainer}>
 
-        <Text style={style.textoB}> Tu lista de metas..</Text>
+        <Text style={style.textoB}> Tu lista de metas...</Text>
         <FlatList
           data={myGoals}
           renderItem={(item) => (
-            <View key={item.item}
+            <View key={item.item.id}
               style={style.vista}>
-              <Text style={style.textoVista}>   -  {item.item}</Text>
+              <Text style={style.textoVista}>   -  {item.item.text}</Text>
             </View>
           )
 
