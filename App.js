@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 import MeterMeta from './componentes/MeterMeta';
+import ItemMeta from './componentes/ItemMeta';
 export default function App() {
 
   //Declaramos el Hook de estado de componente "newGoal"
@@ -35,10 +36,7 @@ export default function App() {
         <FlatList
           data={myGoals}
           renderItem={(item) => (
-            <View key={item.item.id}
-              style={style.vista}>
-              <Text style={style.textoVista}>   -  {item.item.text}</Text>
-            </View>
+            <ItemMeta key={item.item.id} texto={item.item.text} />
           )
 
           }
