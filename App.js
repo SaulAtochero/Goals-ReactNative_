@@ -26,7 +26,11 @@ export default function App() {
     }]);
 
   }
-
+  function onDeleteGoalHandler(id) {
+    setMyGoal((myGoals) => {
+      return myGoals.filter((goal) => goal.id != id)
+    })
+  }
   return (
     <View style={style.container}>
       <MeterMeta nuevaMeta={añadirLista} />
@@ -35,8 +39,12 @@ export default function App() {
         <Text style={style.textoB}> Tu lista de metas...</Text>
         <FlatList
           data={myGoals}
-          renderItem={(item) => (
-            <ItemMeta key={item.item.id} texto={item.item.text} />
+          renderItem={(dataitem) => (
+            <ItemMeta
+              key={dataitem.item.id}
+              id={dataitem.item.id}
+              texto={dataitem.item.text}
+              borrarMeta={onDeleteGoalHandler} />
           )
 
           }

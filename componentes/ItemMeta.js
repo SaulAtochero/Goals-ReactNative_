@@ -2,14 +2,19 @@ import {
     StyleSheet,
     View,
     Text,
+    Pressable,
 
 } from 'react-native';
-export default function ItemMeta({ texto }) {
+export default function ItemMeta({ texto, id, borrarMeta }) {
     return (
-        <View
-            style={style.vista}>
-            <Text style={style.textoVista}>   -  {texto}</Text>
-        </View>
+        <Pressable onPress={() => {
+            borrarMeta(id)
+        }}>
+            <View
+                style={style.vista}>
+                <Text style={style.textoVista}>   -  {texto}</Text>
+            </View>
+        </Pressable>
     )
 }
 const style = new StyleSheet.create({
