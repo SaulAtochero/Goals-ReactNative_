@@ -5,6 +5,7 @@ import {
     View,
     Button,
     Modal,
+    Image,
 
 } from 'react-native';
 import { useState, React } from 'react';
@@ -26,6 +27,8 @@ export default function MeterMeta({ nuevaMeta, visible, onCancel }) {
     return (
         <Modal visible={visible}
             animationType='slide'>
+            <Image source={require("../assets/img/lista.png")}
+                style={style.imagen} />
             <View style={style.inputcontainer}>
                 <TextInput
                     style={style.TextInput}
@@ -37,6 +40,7 @@ export default function MeterMeta({ nuevaMeta, visible, onCancel }) {
                 <View style={style.containerAcceptCancel}>
                     <View style={style.boton}>
                         <Button
+                            color="#f13f42"
                             title='Cancelar'
                             onPress={onCancel}
                         />
@@ -44,6 +48,7 @@ export default function MeterMeta({ nuevaMeta, visible, onCancel }) {
 
                     <View style={style.boton}>
                         <Button
+                            color="#009000"
                             title='Enviar'
                             onPress={pulsar}
                         />
@@ -80,8 +85,6 @@ const style = new StyleSheet.create({
         marginTop: 10,
         marginRight: 5,
         marginLeft: 5,
-        borderWidth: 2,
-        borderColor: "#f13f42",
     },
     //-------------------------------------------------------------------------------------------//
     TextInput: {
@@ -91,6 +94,12 @@ const style = new StyleSheet.create({
         padding: 8,
         color: "#0c3659",
         fontWeight: "bold",
+    },
+    //-------------------------------------------------------------------------------------------//
+    imagen: {
+        marginLeft: "20%",
+        maxHeight: "50%",
+        maxWidth: "60%",
     },
     //-------------------------------------------------------------------------------------------//
 })
