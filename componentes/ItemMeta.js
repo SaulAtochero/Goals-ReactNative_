@@ -7,9 +7,12 @@ import {
 } from 'react-native';
 export default function ItemMeta({ texto, id, borrarMeta }) {
     return (
-        <Pressable onPress={() => {
-            borrarMeta(id)
-        }}>
+        <Pressable
+            android_ripple={{ color: "#210644" }}
+            style={({ pressed }) => pressed && style.pressedItem}
+            onPress={() => {
+                borrarMeta(id)
+            }}>
             <View
                 style={style.vista}>
                 <Text style={style.textoVista}>   -  {texto}</Text>
@@ -35,4 +38,7 @@ const style = new StyleSheet.create({
         backgroundColor: "yellow",
     },
     //-------------------------------------------------------------------------------------------//
+    pressedItem: {
+        opacity: 0.5,
+    },
 })

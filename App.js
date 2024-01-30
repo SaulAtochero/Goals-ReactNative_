@@ -16,7 +16,7 @@ export default function App() {
   //        |          |
   //        V          V
   const [myGoals, setMyGoal] = useState([]);
-
+  const [modalVisible, setModalVisible] = useState(false)
 
   //me llevo el  text Change handler
   function añadirLista(newGoalText) {
@@ -31,11 +31,19 @@ export default function App() {
       return myGoals.filter((goal) => goal.id != id)
     })
   }
+  function cerrarModal() {
+    setModalVisible(false);
+  }
   return (
     <View style={style.container}>
-      <MeterMeta nuevaMeta={añadirLista} />
+      <MeterMeta nuevaMeta={añadirLista}
+        visible={modalVisible}
+        onCancel={cerrarModal} />
       <View style={style.goalsContainer}>
-
+        <Button
+          title='Añadir Meta'
+          onPress={() => setModalVisible(true)}
+        />
         <Text style={style.textoB}> Tu lista de metas...</Text>
         <FlatList
           data={myGoals}

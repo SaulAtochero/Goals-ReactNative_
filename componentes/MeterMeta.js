@@ -4,12 +4,13 @@ import {
     TextInput,
     View,
     Button,
+    Modal,
 
 } from 'react-native';
 import { useState, React } from 'react';
 
 //metemos a traves del padre, la funcionalidad de agregar a ala lista por eso ponemos props
-export default function MeterMeta({ nuevaMeta }) {
+export default function MeterMeta({ nuevaMeta, visible, onCancel }) {
 
     const [newGoal, setNewGoal] = useState("");
     function textChangeHandler(texto) {
@@ -23,20 +24,26 @@ export default function MeterMeta({ nuevaMeta }) {
         setNewGoal("");
     }
     return (
-        //Traigo el componente de meter las metas, de App.js
-        <View style={style.inputcontainer}>
-            <TextInput
-                style={style.TextInput}
-                value={newGoal}
-                placeholder='Introduce una meta'
-                onChangeText={textChangeHandler}
+        <Modal visible={visible}
+            animationType='slide'>
+            <View style={style.inputcontainer}>
+                <TextInput
+                    style={style.TextInput}
+                    value={newGoal}
+                    placeholder='Introduce una meta'
+                    onChangeText={textChangeHandler}
 
-            />
-            <Button
-                title='Enviar'
-                onPress={pulsar}
-            />
-        </View>
+                />
+                <Button
+                    title='Cancelar'
+                    onPress={onCancel}
+                />
+                <Button
+                    title='Enviar'
+                    onPress={pulsar}
+                />
+            </View>
+        </Modal>
     )
 }
 //Traigo el style a este componente
