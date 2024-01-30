@@ -9,6 +9,10 @@ import {
 import { useState } from 'react';
 import MeterMeta from './componentes/MeterMeta';
 import ItemMeta from './componentes/ItemMeta';
+import { StatusBar } from 'expo-status-bar';
+
+
+
 export default function App() {
 
   //Declaramos el Hook de estado de componente "newGoal"
@@ -35,30 +39,33 @@ export default function App() {
     setModalVisible(false);
   }
   return (
-    <View style={style.container}>
-      <MeterMeta nuevaMeta={añadirLista}
-        visible={modalVisible}
-        onCancel={cerrarModal} />
-      <View style={style.goalsContainer}>
-        <Button
-          title='Añadir Meta'
-          onPress={() => setModalVisible(true)}
-        />
-        <Text style={style.textoB}> Tu lista de metas...</Text>
-        <FlatList
-          data={myGoals}
-          renderItem={(dataitem) => (
-            <ItemMeta
-              key={dataitem.item.id}
-              id={dataitem.item.id}
-              texto={dataitem.item.text}
-              borrarMeta={onDeleteGoalHandler} />
-          )
+    <>
+      <StatusBar style='dark' />
+      <View style={style.container}>
+        <MeterMeta nuevaMeta={añadirLista}
+          visible={modalVisible}
+          onCancel={cerrarModal} />
+        <View style={style.goalsContainer}>
+          <Button
+            title='Añadir Meta'
+            onPress={() => setModalVisible(true)}
+          />
+          <Text style={style.textoListaMeta}> Tu lista de metas...</Text>
+          <FlatList
+            data={myGoals}
+            renderItem={(dataitem) => (
+              <ItemMeta
+                key={dataitem.item.id}
+                id={dataitem.item.id}
+                texto={dataitem.item.text}
+                borrarMeta={onDeleteGoalHandler} />
+            )
 
-          }
-        />
+            }
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 const style = new StyleSheet.create({
@@ -95,6 +102,13 @@ const style = new StyleSheet.create({
   textoB: {
     fontWeight: "bold",
     fontSize: 20,
+  },
+  //-------------------------------------------------------------------------------------------//
+  textoListaMeta: {
+    fontWeight: "bold",
+    fontSize: 20,
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   //-------------------------------------------------------------------------------------------//
   vista: {
